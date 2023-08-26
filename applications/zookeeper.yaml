@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zookeeper
+spec:
+  destination:
+    namespace: zookeeper
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: 10.0.11
+    chart: zookeeper
+    helm:
+      parameters:
+        - name: replicaCount
+          value: '1'
+        - name: allowAnonymousLogin
+          value: 'true'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

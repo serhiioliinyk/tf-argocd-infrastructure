@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: ingress-nginx
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://kubernetes.github.io/ingress-nginx'
+    targetRevision: 4.5.2
+    chart: ingress-nginx
+    helm:
+      parameters:
+        - name: service.externalTrafficPolicy
+          value: "Local"
+        - name: controller.publishService.enabled
+          value: 'true'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,6 @@
+resources:
+  - applications/postgres.yaml
+  - applications/ingress.yaml
+  - applications/kafka.yaml
+  - applications/zookeeper.yaml
+  - applications/vault.yaml
