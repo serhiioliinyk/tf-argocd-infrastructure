@@ -1,5 +1,5 @@
 resources:
-  - applications/postgres.yaml
+  - applications/postgresql.yaml
   - applications/ingress.yaml
   - applications/kafka.yaml
   - applications/zookeeper.yaml
